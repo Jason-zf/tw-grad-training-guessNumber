@@ -5,4 +5,10 @@ describe('Guess Number', () => {
         let input = [1, 2];
         expect(guessNumber(input)).toEqual("Wrong Input，Input again");
     });
+
+    it('should return Wrong Input，Input again when input contains repeat number', function () {
+        let input = [1, 1, 2, 3];
+        expect(guessNumber(input)).toEqual("Wrong Input，Input again");
+    });
+
 });
