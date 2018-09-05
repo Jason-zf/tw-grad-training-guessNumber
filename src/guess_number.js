@@ -1,18 +1,18 @@
 const answer = [1, 2, 3, 4];
 
-const getResult = (inputElement, answer) => {
+const getResult = (inputElement, answerIn) => {
     let numOfA = 0, numOfB = 0;
     let res = {'Output': '', 'Instruction': ''};
     let wrongPosition = [];
     let correct = [];
-    for (let i = 0; i < answer.length; i++) {
-        if (answer[i] === inputElement[i]) {
+    for (let i = 0; i < answerIn.length; i++) {
+        if (answerIn[i] === inputElement[i]) {
             numOfA++;
-            correct.push(answer[i]);
+            correct.push(answerIn[i]);
         }
-        if (i !== inputElement.indexOf(answer[i])) {
+        if (inputElement.includes(answerIn[i]) && i !== inputElement.indexOf(answerIn[i])) {
             numOfB++;
-            wrongPosition.push[answer[i]];
+            wrongPosition.push(answerIn[i]);
         }
     }
     res.Output = numOfA + "A" + numOfB + "B";
@@ -28,19 +28,19 @@ const getResult = (inputElement, answer) => {
         res.Instruction = "all wrong";
         return res;
     }
-
-    correct = correct.length === 0 ? "" : correct.join(" and ") + " correct";
-    wrongPosition = wrongPosition.length === 0 ? "" : wrongPosition.join(" and ") + " wrong position";
-    res.Instruction = (correct !== '' && wrongPosition !== '') ? correct + ", " + wrongPosition : correct + wrongPosition;
+    correct = numOfA === 0 ? "" : correct.join(" and ") + " correct";
+    wrongPosition = numOfB === 0 ? "" : wrongPosition.join(" and ") + " wrong position";
+    res.Instruction = (correct.length !== 0 && wrongPosition.length !== 0) ? correct + ", " + wrongPosition : correct + wrongPosition;
     return res;
 }
 
 const guessNumber = (input, print) => {
-    for (let i = 0; i < input.length; i++) {
+    for (let i = 0; i < Math.min(6, input.length); i++) {
         if (!inputValidation(input[i])) {
             print("Wrong Input，Input again");
         }
-        print(getResult(input[i].split(' ').map(value => parseInt(value)), answer).Instruction);
+        let string = getResult(input[i].split(' ').map(value => parseInt(value)), answer);
+        print(string.Instruction);
     }
 }
 
