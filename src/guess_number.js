@@ -1,4 +1,5 @@
 const answer = [1, 2, 3, 4];
+let win = false;
 
 const getResult = (inputElement, answerIn) => {
     let numOfA = 0, numOfB = 0;
@@ -18,6 +19,7 @@ const getResult = (inputElement, answerIn) => {
     res.Output = numOfA + "A" + numOfB + "B";
     if (numOfA === 4) {
         res.Instruction = "win, all correct";
+        win = true;
         return res;
     }
     if (numOfB === 4) {
@@ -42,6 +44,12 @@ const guessNumber = (input, print) => {
         let string = getResult(input[i].split(' ').map(value => parseInt(value)), answer);
         print(string.Instruction);
     }
+    if(win){
+        print("Congratulations，you win!");
+    }else {
+        print("Game over!");
+    }
+
 }
 
 const inputValidation = (input) => {
