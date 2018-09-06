@@ -44,18 +44,15 @@ const guessNumber = (input, print) => {
         let string = getResult(input[i].split(' ').map(value => parseInt(value)), answer);
         print(string.Instruction);
     }
-    if(win){
+    if (win) {
         print("Congratulations，you win!");
-    }else {
+    } else if (!win && input.length === 6) {
         print("Game over!");
     }
 
 }
 
 const inputValidation = (input) => {
-    if (input.split(' ').length != 4 || new Set(input.split(' ').map(value => parseInt(value))).size < 4) {
-        return false;
-    }
-    return true;
+    return (!(input.split(' ').length != 4 || new Set(input.split(' ').map(value => parseInt(value))).size < 4));
 }
 module.exports = guessNumber;
